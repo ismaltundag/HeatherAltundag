@@ -1,5 +1,13 @@
-import PageTemplate, { generateMetadata } from './[slug]/page'
+import type { Metadata } from 'next'
 
-export default PageTemplate
+import { EditorialHome } from '@/components/EditorialHome'
 
-export { generateMetadata }
+export const metadata: Metadata = {
+  title: 'Heather Altundag | Editorial & Author Support',
+  description:
+    'Thoughtful editing, proofreading, beta reading, and author support for your next chapter.',
+}
+
+export default function HomePage() {
+  return <EditorialHome />
+}

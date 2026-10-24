@@ -1,25 +1,30 @@
-import type { CollectionConfig } from 'payload'
+import type { Access, CollectionConfig } from 'payload'
 
 import { adminOnly } from '@/access/adminOnly'
 import { adminOnlyFieldAccess } from '@/access/adminOnlyFieldAccess'
-import { publicAccess } from '@/access/publicAccess'
-import { adminOrSelf } from '@/access/adminOrSelf'
 import { checkRole } from '@/access/utilities'
 
 import { ensureFirstUserIsAdmin } from './hooks/ensureFirstUserIsAdmin'
+
+const adminOrFirstUser: Access = async ({ req }) => {
+  if (checkRole(['admin'], req.user)) return true
+
+  const users = await req.payload.count({ collection: 'users', overrideAccess: true })
+  return users.totalDocs === 0
+}
 
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
     admin: ({ req: { user } }) => checkRole(['admin'], user),
-    create: publicAccess,
+    create: adminOrFirstUser,
     delete: adminOnly,
-    read: adminOrSelf,
+    read: adminOnly,
     unlock: adminOnly,
-    update: adminOrSelf,
+    update: adminOnly,
   },
   admin: {
-    group: 'Users',
+    group: 'Settings',
     defaultColumns: ['name', 'email', 'roles'],
     useAsTitle: 'name',
   },
@@ -39,7 +44,7 @@ export const Users: CollectionConfig = {
         read: adminOnlyFieldAccess,
         update: adminOnlyFieldAccess,
       },
-      defaultValue: ['customer'],
+      defaultValue: ['admin'],
       hasMany: true,
       hooks: {
         beforeChange: [ensureFirstUserIsAdmin],
@@ -49,41 +54,7 @@ export const Users: CollectionConfig = {
           label: 'admin',
           value: 'admin',
         },
-        {
-          label: 'customer',
-          value: 'customer',
-        },
       ],
-    },
-    {
-      name: 'orders',
-      type: 'join',
-      collection: 'orders',
-      on: 'customer',
-      admin: {
-        allowCreate: false,
-        defaultColumns: ['id', 'createdAt', 'total', 'currency', 'items'],
-      },
-    },
-    {
-      name: 'cart',
-      type: 'join',
-      collection: 'carts',
-      on: 'customer',
-      admin: {
-        allowCreate: false,
-        defaultColumns: ['id', 'createdAt', 'total', 'currency', 'items'],
-      },
-    },
-    {
-      name: 'addresses',
-      type: 'join',
-      collection: 'addresses',
-      on: 'customer',
-      admin: {
-        allowCreate: false,
-        defaultColumns: ['id'],
-      },
     },
   ],
 }
