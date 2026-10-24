@@ -64,8 +64,8 @@ export function HeaderClient({ header }: Props) {
             ))}
           </ul>
         ) : null}
-        <Link className="editorial-header-cta" href="/contact">
-          Work with me <span aria-hidden="true">↗</span>
+        <Link className="editorial-header-cta" href="/contact" aria-label="Work with me">
+          <span className="editorial-header-cta-label">Work with me</span> <span aria-hidden="true">↗</span>
         </Link>
       </nav>
     </header>
