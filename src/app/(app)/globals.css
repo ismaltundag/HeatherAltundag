@@ -2493,3 +2493,44 @@ button {
     margin-top: 2.5rem;
   }
 }
+
+/* Responsive editorial header: keep all three controls in the flex flow. */
+@media (max-width: 760px) {
+  .editorial-header-inner {
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .editorial-mobile-menu,
+  .editorial-header-cta {
+    position: static;
+    flex: 0 0 auto;
+  }
+  .editorial-wordmark {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 0.4rem;
+  }
+  .editorial-wordmark-text {
+    min-width: 0;
+  }
+  .editorial-wordmark-text strong,
+  .editorial-wordmark-text small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .editorial-wordmark-text strong {
+    display: block;
+    font-size: clamp(0.78rem, 3.3vw, 1.08rem);
+  }
+  .editorial-header-cta {
+    width: 2.7rem;
+    height: 2.7rem;
+    min-height: 2.7rem;
+    padding: 0;
+    font-size: 1rem;
+  }
+  .editorial-header-cta-label {
+    display: none;
+  }
+}
