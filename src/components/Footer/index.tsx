@@ -1,6 +1,5 @@
 import type { Footer } from '@/payload-types'
 
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import configPromise from '@payload-config'
 import Link from 'next/link'
 import { getPayload } from 'payload'
@@ -82,9 +81,6 @@ export async function Footer() {
               </div>
             </div>
           ) : null}
-          <div className="editorial-footer-theme">
-            <ThemeSelector />
-          </div>
         </div>
       </div>
       <div className="border-t border-neutral-200 py-2 text-sm dark:border-neutral-700">
