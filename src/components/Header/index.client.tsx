@@ -22,7 +22,7 @@ const fallbackMenu: NonNullable<Header['navItems']> = [
 ]
 
 export function HeaderClient({ header }: Props) {
-  const menu = header?.navItems?.length ? header.navItems : fallbackMenu
+  const menu = (header?.navItems?.length ? header.navItems : fallbackMenu).filter((item) => !['/websites', '/author-assistance', '/packages', '/find-your-service'].includes(item.link.url || ''))
   const pathname = usePathname()
 
   return (
