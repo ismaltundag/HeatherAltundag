@@ -6,7 +6,7 @@ export const metadata = { title: 'Blog | Heather Altundag', description: 'Writin
 export default async function Page() {
   const settings = await getSiteContent()
   let posts: any[] = []
-  try { const payload = await getPayload({config:configPromise}); posts = (await payload.find({collection:'blog-posts',depth:1,sort:'-publishedAt',limit:50,overrideAccess:false,where:{_status:{equals:'published'}}})).docs } catch {}
+  try { const payload = await getPayload({config:configPromise}); posts = (await payload.find({collection:'blog-posts' as any,depth:1,sort:'-publishedAt',limit:50,overrideAccess:false,where:{_status:{equals:'published'}}})).docs } catch {}
   return <article className="editorial-page"><header className="editorial-page-hero">
     <p className="editorial-eyebrow">{copy(settings,'blogEyebrow','The author’s notebook')}</p>
     <h1>{copy(settings,'blogTitle','Writing & publishing insights')}</h1>
