@@ -1,4 +1,5 @@
 import type { Footer } from '@/payload-types'
+import { getSiteContent, copy } from '@/utilities/siteContent'
 
 import configPromise from '@payload-config'
 import Link from 'next/link'
@@ -15,16 +16,19 @@ import {
     siYoutube,
 } from 'simple-icons'
 
-const SITE_NAME = 'Heather Altundag · Editorial & Author Support'
-
 export async function Footer() {
   const payload = await getPayload({ config: configPromise })
   const footer: Footer = await payload.findGlobal({ slug: 'footer', depth: 1 })
   const socialLinks = footer.socialLinks || []
+  const settings = await getSiteContent()
+  const siteName = copy(settings, 'siteName', 'Heather Altundag')
+  const siteTagline = copy(settings, 'siteTagline', 'Editorial & Author Support')
+  const defaultFooterLinks = [{url:'/about',label:'About'},{url:'/services',label:'Services'},{url:'/portfolio',label:'Portfolio'},{url:'/journal',label:'Reading Journal'},{url:'/blog',label:'Blog'},{url:'/resources',label:'Resources'},{url:'/contact',label:'Work with me'}]
+  const footerLinks = footer.navItems?.length ? footer.navItems.map(item => ({url:item.link.url || '#',label:item.link.label || 'Link'})) : defaultFooterLinks
   const currentYear = new Date().getFullYear()
   const copyrightDate = currentYear
 
-  const copyrightName = SITE_NAME
+  const copyrightName = `${siteName} · ${siteTagline}`
 
   return (
     <footer className="text-sm text-neutral-500 dark:text-neutral-400">
@@ -35,17 +39,11 @@ export async function Footer() {
               HA
             </span>
             <span className="editorial-footer-brand">
-              Heather Altundag <small>Editorial & Author Support</small>
+              {siteName} <small>{siteTagline}</small>
             </span>
           </Link>
           <nav aria-label="Footer navigation" className="editorial-footer-nav">
-            <Link href="/about">About</Link>
-            <Link href="/services">Services</Link>
-            <Link href="/portfolio">Portfolio</Link>
-            <Link href="/journal">Reading Journal</Link>
-            <Link href="/blog">Blog</Link>
-            <Link href="/resources">Resources</Link>
-            <Link href="/contact">Work with me</Link>
+            {footerLinks.map(item => <Link href={item.url} key={`${item.url}-${item.label}`}>{item.label}</Link>)}
           </nav>
           {socialLinks.length ? (
             <div className="editorial-footer-social" aria-label="Social media links">
