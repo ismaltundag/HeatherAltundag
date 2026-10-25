@@ -10,6 +10,9 @@ import { usePathname } from 'next/navigation'
 
 type Props = {
   header: Header
+  siteName?: string
+  siteTagline?: string
+  headerCta?: string
 }
 
 const fallbackMenu: NonNullable<Header['navItems']> = [
@@ -21,7 +24,7 @@ const fallbackMenu: NonNullable<Header['navItems']> = [
   { id: 'faq', link: { type: 'custom', label: 'FAQ', url: '/services#faq' } },
 ]
 
-export function HeaderClient({ header }: Props) {
+export function HeaderClient({ header, siteName, siteTagline, headerCta }: Props) {
   const menu = (header?.navItems?.length ? header.navItems : fallbackMenu).filter((item) => !['/websites', '/author-assistance', '/packages', '/find-your-service'].includes(item.link.url || ''))
   const pathname = usePathname()
 
@@ -42,8 +45,8 @@ export function HeaderClient({ header }: Props) {
             HA
           </span>
           <span className="editorial-wordmark-text">
-            <strong>Heather Altundag</strong>
-            <small>Editorial & Author Support</small>
+            <strong>{siteName || 'Heather Altundag'}</strong>
+            <small>{siteTagline || 'Editorial & Author Support'}</small>
           </span>
         </Link>
         {menu.length ? (
@@ -66,7 +69,7 @@ export function HeaderClient({ header }: Props) {
           </ul>
         ) : null}
         <Link className="editorial-header-cta" href="/contact" aria-label="Work with me">
-          <span className="editorial-header-cta-label">Work with me</span> <span aria-hidden="true">↗</span>
+          <span className="editorial-header-cta-label">{headerCta || "Work with me"}</span> <span aria-hidden="true">↗</span>
         </Link>
       </nav>
     </header>
