@@ -68,13 +68,19 @@ export const SiteContent: GlobalConfig = {
         textField('serviceCtaEmphasis', 'Service CTA emphasized heading'),
         textField('serviceCtaButton', 'Service CTA button'),
       ] },
-      { label: 'New sections', fields: [
-        textField('blogEyebrow','Blog eyebrow'), textField('blogTitle','Blog heading'), longField('blogIntro','Blog introduction'),
+      { label: 'Service subpages', fields: [
+
         textField('webEyebrow','Website design eyebrow'), textField('webTitle','Website design heading'), longField('webIntro','Website design introduction'),
         textField('assistantEyebrow','Author assistance eyebrow'), textField('assistantTitle','Author assistance heading'), longField('assistantIntro','Author assistance introduction'),
         textField('packagesEyebrow','Packages eyebrow'), textField('packagesTitle','Packages heading'), longField('packagesIntro','Packages introduction'),
         textField('toolsTitle','Service finder heading'), longField('toolsIntro','Service finder introduction'),
+
+      ] },
+      { label: 'Blog & Resources', fields: [
+        textField('blogEyebrow','Blog eyebrow'), textField('blogTitle','Blog heading'), longField('blogIntro','Blog introduction'),
         textField('resourcesTitle','Resources heading'), longField('resourcesIntro','Resources introduction'),
+      ] },
+      { label: 'Identity & navigation', fields: [
         textField('siteName','Website brand name'), textField('siteTagline','Website brand tagline'), textField('headerCta','Header CTA label'),
       ] },
       { label: 'Brand settings', fields: [
