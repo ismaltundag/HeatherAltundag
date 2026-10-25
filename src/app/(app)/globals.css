@@ -282,11 +282,18 @@ body {
   width: 2.65rem;
   height: 2.65rem;
   place-items: center;
-  border: 1px solid rgb(23 35 63 / 28%);
+  border: 1px solid rgb(36 80 200 / 30%);
   border-radius: 50%;
-  font-family: var(--editorial-display);
-  font-size: 1rem;
-  letter-spacing: -0.06em;
+  background: #fff;
+  color: #2450C8;
+  font-family: "Brush Script MT", "Segoe Script", "Apple Chancery", "URW Chancery L", cursive;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.15em;
+  padding-right: 0.16rem;
+  transform: rotate(-5deg);
 }
 
 .editorial-wordmark-text,
@@ -2539,7 +2546,8 @@ button {
     flex: 0 0 auto;
     width: 1.85rem;
     height: 1.85rem;
-    font-size: 0.78rem;
+    font-size: 1.16rem;
+    padding-right: 0.12rem;
   }
   .editorial-wordmark-text {
     min-width: 0;
