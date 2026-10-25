@@ -2612,3 +2612,10 @@ button {
 .editorial-review-body blockquote { border-left: 4px solid #2450C8; background: #F5F8FF; padding: 1rem 1.3rem; margin: 1.5rem 0; }
 .editorial-review-body strong { font-weight: 700; }
 @media (max-width: 600px) { .editorial-review-body { font-size: 1rem; line-height: 1.8; } }
+
+/* Force genuinely black review copy, including nested Payload rich-text nodes. */
+.editorial-review-body,
+.editorial-review-body :where(p, span, div, li, strong, em, b, i, h1, h2, h3, h4, h5, h6, blockquote) { color: #000 !important; opacity: 1 !important; text-shadow: none !important; }
+.editorial-review-body :where(p, li, span) { line-height: 1.85 !important; }
+.editorial-review-body a,
+.editorial-review-body a * { color: #1646A8 !important; opacity: 1 !important; }
