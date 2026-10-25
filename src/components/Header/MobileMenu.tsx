@@ -44,9 +44,9 @@ export function MobileMenu({ menu }: Props) {
         <MenuIcon aria-hidden="true" className="h-4 w-4" />
       </SheetTrigger>
 
-      <SheetContent side="left" className="px-4">
+      <SheetContent side="left" className="editorial-mobile-sheet bg-black px-4 text-white [&>button]:text-white">
         <SheetHeader className="px-0 pt-4 pb-0">
-          <SheetTitle>Heather Altundag</SheetTitle>
+          <SheetTitle className="text-white">Heather Altundag</SheetTitle>
 
           <SheetDescription />
         </SheetHeader>
@@ -56,7 +56,7 @@ export function MobileMenu({ menu }: Props) {
             <ul className="flex w-full flex-col">
               {menu.map((item) => (
                 <li className="py-2" key={item.id}>
-                  <Link className="editorial-mobile-nav-link" href={item.link.url || '/'}>
+                  <Link className="editorial-mobile-nav-link text-white hover:text-[#FFEB00] focus-visible:text-[#FFEB00]" href={item.link.url || '/'}>
                     {item.link.label}
                   </Link>
                 </li>
