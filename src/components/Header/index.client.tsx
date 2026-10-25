@@ -38,7 +38,11 @@ export function HeaderClient({ header }: Props) {
           aria-label="Editorial and author support home"
         >
           <span aria-hidden="true" className="editorial-monogram">
-            HA
+            <svg className="editorial-monogram-art" viewBox="0 0 120 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="21" y="67" fill="currentColor" fontFamily="Georgia, 'Times New Roman', serif" fontSize="72" letterSpacing="-8">H</text>
+              <text x="68" y="70" fill="currentColor" fontFamily="Georgia, 'Times New Roman', serif" fontSize="67" letterSpacing="-5">A</text>
+              <path d="M12 59 C-3 40 24 34 47 44 C67 53 81 67 105 55 C115 50 118 43 111 42 M21 62 C4 75 17 84 35 80 C62 74 64 28 81 17 C92 9 96 25 83 39 C75 48 64 51 61 57" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
           </span>
           <span className="editorial-wordmark-text">
             <strong>Heather Altundag</strong>
