@@ -1,0 +1,78 @@
+import type { GlobalConfig } from 'payload'
+import { adminOnly } from '@/access/adminOnly'
+
+const textField = (name: string, label: string) => ({ name, label, type: 'text' as const })
+const longField = (name: string, label: string) => ({ name, label, type: 'textarea' as const })
+
+export const SiteContent: GlobalConfig = {
+  slug: 'site-content',
+  label: 'Website Content & Settings',
+  admin: { group: 'Site & Pages', description: 'Edit public-facing headings, descriptions, buttons, process steps, FAQs, and design colors without changing code.' },
+  access: { read: () => true, update: adminOnly },
+  fields: [
+    { type: 'tabs', tabs: [
+      { label: 'Homepage hero', fields: [
+        textField('heroEyebrow', 'Small heading'),
+        textField('heroTitleFirst', 'Headline first line'),
+        textField('heroTitleEmphasis', 'Headline emphasized line'),
+        textField('heroTitleLast', 'Headline last line'),
+        longField('heroDescription', 'Introduction'),
+        textField('heroPrimaryButton', 'Primary button label'),
+        textField('heroSecondaryButton', 'Secondary button label'),
+        textField('heroPaperText', 'Artwork paper text'),
+        textField('heroNoteText', 'Artwork note text'),
+        textField('heroIndexText', 'Hero footer caption'),
+      ] },
+      { label: 'Homepage sections', fields: [
+        textField('servicesEyebrow', 'Services eyebrow'),
+        textField('servicesHeading', 'Services heading'),
+        textField('servicesEmphasis', 'Services emphasized heading'),
+        longField('servicesDescription', 'Services introduction'),
+        textField('servicesFooter', 'Services footnote'),
+        textField('servicesButton', 'Services button label'),
+        textField('processEyebrow', 'Process eyebrow'),
+        textField('processHeading', 'Process heading'),
+        textField('processEmphasis', 'Process emphasized heading'),
+        { name: 'processSteps', type: 'array', fields: [textField('title', 'Step title'), longField('description', 'Step description')] },
+        textField('journalEyebrow', 'Journal eyebrow'),
+        textField('journalHeading', 'Journal heading'),
+        textField('journalEmphasis', 'Journal emphasized heading'),
+        longField('journalDescription', 'Journal description'),
+        textField('journalButton', 'Journal button'),
+        textField('testimonialsEyebrow', 'Testimonials eyebrow'),
+        textField('testimonialsHeading', 'Testimonials heading'),
+        textField('testimonialsEmphasis', 'Testimonials emphasized heading'),
+        textField('closingEyebrow', 'Closing eyebrow'),
+        textField('closingHeading', 'Closing heading'),
+        textField('closingEmphasis', 'Closing emphasized heading'),
+        longField('closingDescription', 'Closing description'),
+        textField('closingButton', 'Closing button'),
+      ] },
+      { label: 'Services & FAQ', fields: [
+        textField('servicePageEyebrow', 'Services page eyebrow'),
+        textField('servicePageHeading', 'Services page heading'),
+        textField('servicePageEmphasis', 'Services page emphasized heading'),
+        longField('servicePageDescription', 'Services page description'),
+        textField('serviceListEyebrow', 'Service list eyebrow'),
+        textField('serviceListHeading', 'Service list heading'),
+        textField('serviceListEmphasis', 'Service list emphasized heading'),
+        longField('serviceListDescription', 'Service list description'),
+        longField('pricingDisclaimer', 'Pricing disclaimer'),
+        textField('faqEyebrow', 'FAQ eyebrow'),
+        textField('faqHeading', 'FAQ heading'),
+        textField('faqEmphasis', 'FAQ emphasized heading'),
+        longField('faqIntroduction', 'FAQ introduction'),
+        { name: 'faqs', type: 'array', labels: { singular: 'Question', plural: 'Questions' }, fields: [textField('question', 'Question'), longField('answer', 'Answer')] },
+        textField('serviceCtaEyebrow', 'Service CTA eyebrow'),
+        textField('serviceCtaHeading', 'Service CTA heading'),
+        textField('serviceCtaEmphasis', 'Service CTA emphasized heading'),
+        textField('serviceCtaButton', 'Service CTA button'),
+      ] },
+      { label: 'Brand settings', fields: [
+        { name: 'brandBlue', type: 'text', label: 'Royal blue hex color', admin: { description: 'e.g. #2450C8' }, validate: (value: unknown) => !value || (typeof value === 'string' && /^#[0-9a-fA-F]{6}$/.test(value)) ? true : 'Use a six-digit hex color such as #2450C8' },
+        { name: 'brandYellow', type: 'text', label: 'Yellow hex color', validate: (value: unknown) => !value || (typeof value === 'string' && /^#[0-9a-fA-F]{6}$/.test(value)) ? true : 'Use a six-digit hex color such as #FFEB00' },
+        { name: 'brandNavy', type: 'text', label: 'Navy hex color', validate: (value: unknown) => !value || (typeof value === 'string' && /^#[0-9a-fA-F]{6}$/.test(value)) ? true : 'Use a six-digit hex color such as #102347' },
+      ] },
+    ] },
+  ],
+}
