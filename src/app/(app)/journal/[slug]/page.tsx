@@ -105,7 +105,7 @@ export default async function JournalEntryPage({ params }: Args) {
           </Link>
         </div>
 
-        <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-neutral-500 mb-3">
+        <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-widest !text-black mb-3">
           <span>{entry.category || 'Journal'}</span>
           {formattedDate && (
             <>
@@ -120,7 +120,7 @@ export default async function JournalEntryPage({ params }: Args) {
         </h1>
 
         {entry.excerpt && (
-          <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-300 italic leading-relaxed pt-2">
+          <p className="text-lg md:text-xl !text-black !opacity-100 leading-relaxed pt-2">
             {entry.excerpt}
           </p>
         )}
