@@ -23,6 +23,7 @@ import { Services } from '@/collections/Services'
 import { Testimonials } from '@/collections/Testimonials'
 import { Users } from '@/collections/Users'
 import { About } from '@/globals/About'
+import { SiteContent } from '@/globals/SiteContent'
 import { Footer } from '@/globals/Footer'
 import { Header } from '@/globals/Header'
 import { plugins } from './plugins'
@@ -94,7 +95,7 @@ export default buildConfig({
   }),
   //email: nodemailerAdapter(),
   endpoints: [],
-  globals: [Header, Footer, About],
+  globals: [Header, Footer, About, SiteContent],
   plugins,
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
