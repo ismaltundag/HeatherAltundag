@@ -93,9 +93,9 @@ export default async function JournalEntryPage({ params }: Args) {
     : null
 
   return (
-    <article className="min-h-screen pb-16">
+    <article className="editorial-page min-h-screen pb-16 bg-[#F5F8FF] text-[#102347]">
       {/* Header */}
-      <header className="storm-list-hero max-w-4xl mx-auto pt-12 pb-8 px-4">
+      <header className="max-w-4xl mx-auto pt-12 pb-8 px-4">
         <div className="mb-6">
           <Link
             className="storm-text-link inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-neutral-600 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
@@ -141,12 +141,12 @@ export default async function JournalEntryPage({ params }: Args) {
 
       {/* Content Body */}
       <div className="max-w-3xl mx-auto px-4 py-6">
-        <div className="prose prose-lg dark:prose-invert font-sans leading-relaxed">
+        <div className="editorial-review-body rounded-2xl border border-[#DCE8FA] bg-white px-5 py-8 text-[#102347] shadow-sm sm:px-9 sm:py-10">
           <RichText data={entry.content} enableGutter={false} />
         </div>
 
         {/* Reading Journal signoff */}
-        <div className="mt-14 pt-8 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+        <div className="mt-14 pt-8 border-t border-[#DCE8FA] flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="font-serif text-lg font-medium text-neutral-900 dark:text-white">
               — Heather Altundag
