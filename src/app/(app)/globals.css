@@ -2619,3 +2619,12 @@ button {
 .editorial-review-body :where(p, li, span) { line-height: 1.85 !important; }
 .editorial-review-body a,
 .editorial-review-body a * { color: #1646A8 !important; opacity: 1 !important; }
+
+/* Author tools use the existing editorial blue/yellow/navy palette. */
+.editorial-tools-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; }
+.editorial-tools-grid .editorial-service-card { display:flex; flex-direction:column; gap:1rem; }
+.editorial-tools-grid label { font-weight:700; color:#102347; }
+.editorial-tools-grid select,.editorial-tools-grid input { width:100%; padding:.8rem 1rem; border:1px solid #bcc9e3; border-radius:.5rem; background:#fff; color:#102347; }
+.editorial-tool-result { padding:1rem; border-left:4px solid #2450C8; background:#f0f4ff; color:#102347; }
+.editorial-tools-grid a:focus-visible,.editorial-tools-grid input:focus-visible,.editorial-tools-grid select:focus-visible { outline:3px solid #FFEB00; outline-offset:3px; }
+@media(max-width:760px) { .editorial-tools-grid { grid-template-columns:1fr; } }
