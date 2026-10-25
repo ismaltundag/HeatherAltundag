@@ -3,6 +3,7 @@ import type { Service } from '@/payload-types'
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPayload } from 'payload'
+import { getSiteContent, copy } from '@/utilities/siteContent'
 
 export const metadata: Metadata = {
   title: 'Services | Editorial & Author Support',
@@ -85,18 +86,29 @@ export default async function ServicesPage() {
     // Keep the services overview available while the CMS is being configured.
   }
 
+  const settings = await getSiteContent()
+  const c = (key: string, fallback: string) => copy(settings, key, fallback)
+  const defaultFaqs = [
+    { question: 'Which service fits my manuscript?', answer: 'Share your manuscript stage and goals in the inquiry form. The appropriate service and scope can be discussed before a quote is prepared.' },
+    { question: 'How is pricing determined?', answer: 'Pricing depends on service, manuscript length or task scope, condition, requested deliverables, and scheduling. Any estimate is non-binding until confirmed in writing.' },
+    { question: 'Do you accept every genre and project?', answer: 'Accepted genres, formats, and availability should be confirmed before a project is booked. Include those details in your inquiry.' },
+    { question: 'How do you handle confidentiality?', answer: 'Unpublished material and project details should be shared only through the agreed process. Review the privacy and service terms before submitting sensitive information.' },
+    { question: 'Do you offer sample edits or reports?', answer: 'Ask about a sample or introductory conversation in your inquiry. Availability and scope are confirmed individually.' },
+    { question: 'What are the payment and revision terms?', answer: 'Payment, cancellation, and revision terms are provided in a written quote or service agreement before work begins.' },
+  ]
+  const faqs: { question: string; answer: string }[] = Array.isArray(settings.faqs) && settings.faqs.length ? settings.faqs : defaultFaqs
+
   return (
     <article className="editorial-page">
       <header className="editorial-page-hero">
-        <p className="editorial-eyebrow">Services & approach</p>
+        <p className="editorial-eyebrow">{c('servicePageEyebrow', "Services & approach")}</p>
         <h1>
-          The right support
+          {c('servicePageHeading', "The right support")}
           <br />
-          <em>for your next step.</em>
+          <em>{c('servicePageEmphasis', "for your next step.")}</em>
         </h1>
         <p>
-          Every project is different. Start with what you need; scope, availability, deliverables,
-          and any estimate are confirmed together before work begins.
+          {c('servicePageDescription', "Every project is different. Start with what you need; scope, availability, deliverables, and any estimate are confirmed together before work begins.")}
         </p>
         <a className="editorial-text-link" href="#service-guide">
           Compare service areas <span aria-hidden="true">↓</span>
@@ -105,16 +117,15 @@ export default async function ServicesPage() {
       <section className="editorial-section" id="service-guide">
         <div className="editorial-section-head">
           <div>
-            <p className="editorial-eyebrow">A clear place to begin</p>
+            <p className="editorial-eyebrow">{c('serviceListEyebrow', "A clear place to begin")}</p>
             <h2>
-              Choose the kind
+              {c('serviceListHeading', "Choose the kind")}
               <br />
-              of help you need.
+              {c('serviceListEmphasis', "of help you need.")}
             </h2>
           </div>
           <p className="editorial-section-note">
-            Only services currently offered and within scope should be published here. Ask about
-            your project if you are unsure where it fits.
+            {c('serviceListDescription', "Only services currently offered and within scope should be published here. Ask about your project if you are unsure where it fits.")}
           </p>
         </div>
         <div className="editorial-services-list">
@@ -158,80 +169,41 @@ export default async function ServicesPage() {
           ))}
         </div>
         <p className="editorial-disclaimer">
-          Any displayed rate is indicative unless explicitly agreed in a written quote. A submission
-          does not reserve availability or create a client relationship.
+          {c('pricingDisclaimer', "Any displayed rate is indicative unless explicitly agreed in a written quote. A submission does not reserve availability or create a client relationship.")}
         </p>
       </section>
       <section className="editorial-faq-section" id="faq">
         <div className="editorial-section editorial-faq-layout">
           <div>
-            <p className="editorial-eyebrow">Good to know</p>
+            <p className="editorial-eyebrow">{c('faqEyebrow', "Good to know")}</p>
             <h2>
-              Before we
+              {c('faqHeading', "Before we")}
               <br />
-              <em>begin.</em>
+              <em>{c('faqEmphasis', "begin.")}</em>
             </h2>
             <p>
-              Questions are welcome. Project details are confirmed directly before any work starts.
+              {c('faqIntroduction', "Questions are welcome. Project details are confirmed directly before any work starts.")}
             </p>
           </div>
           <div className="editorial-faq-list">
-            <details>
-              <summary>Which service fits my manuscript?</summary>
-              <p>
-                Share your manuscript stage and goals in the inquiry form. The appropriate service
-                and scope can be discussed before a quote is prepared.
-              </p>
-            </details>
-            <details>
-              <summary>How is pricing determined?</summary>
-              <p>
-                Pricing depends on service, manuscript length or task scope, condition, requested
-                deliverables, and scheduling. Any estimate is non-binding until confirmed in
-                writing.
-              </p>
-            </details>
-            <details>
-              <summary>Do you accept every genre and project?</summary>
-              <p>
-                Accepted genres, formats, and availability should be confirmed before a project is
-                booked. Include those details in your inquiry.
-              </p>
-            </details>
-            <details>
-              <summary>How do you handle confidentiality?</summary>
-              <p>
-                Unpublished material and project details should be shared only through the agreed
-                process. Review the privacy and service terms before submitting sensitive
-                information.
-              </p>
-            </details>
-            <details>
-              <summary>Do you offer sample edits or reports?</summary>
-              <p>
-                Ask about a sample or introductory conversation in your inquiry. Availability and
-                scope are confirmed individually.
-              </p>
-            </details>
-            <details>
-              <summary>What are the payment and revision terms?</summary>
-              <p>
-                Payment, cancellation, and revision terms are provided in a written quote or service
-                agreement before work begins.
-              </p>
-            </details>
+            {faqs.map((faq, index) => (
+              <details key={index}>
+                <summary>{faq.question}</summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
       <section className="editorial-bottom-cta">
-        <p className="editorial-eyebrow">Ready when you are</p>
+        <p className="editorial-eyebrow">{c('serviceCtaEyebrow', "Ready when you are")}</p>
         <h2>
-          Let’s talk about
+          {c('serviceCtaHeading', "Let’s talk about")}
           <br />
-          <em>your project.</em>
+          <em>{c('serviceCtaEmphasis', "your project.")}</em>
         </h2>
         <Link className="editorial-button editorial-button-primary" href="/contact">
-          Work with me <span aria-hidden="true">↗</span>
+          {c('serviceCtaButton', "Work with me")} <span aria-hidden="true">↗</span>
         </Link>
       </section>
     </article>
