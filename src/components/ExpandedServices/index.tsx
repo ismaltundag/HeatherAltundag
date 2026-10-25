@@ -29,7 +29,7 @@ export async function ExpandedServices({ category }: { category: 'web-design' | 
   let items: any[] = []
   try {
     const payload = await getPayload({ config: configPromise })
-    const result = await payload.find({ collection: 'offerings', limit: 100, sort: 'sortOrder', depth: 0, overrideAccess: false,
+    const result = await payload.find({ collection: 'offerings' as any, limit: 100, sort: 'sortOrder', depth: 0, overrideAccess: false,
       where: { and: [{ category: { equals: category } }, { _status: { equals: 'published' } }] } })
     items = result.docs
   } catch { /* The CMS may not yet have content. */ }
