@@ -73,6 +73,7 @@ export const SiteContent: GlobalConfig = {
         textField('webEyebrow','Website design eyebrow'), textField('webTitle','Website design heading'), longField('webIntro','Website design introduction'),
         textField('assistantEyebrow','Author assistance eyebrow'), textField('assistantTitle','Author assistance heading'), longField('assistantIntro','Author assistance introduction'),
         textField('packagesEyebrow','Packages eyebrow'), textField('packagesTitle','Packages heading'), longField('packagesIntro','Packages introduction'),
+        textField('toolsTitle','Service finder heading'), longField('toolsIntro','Service finder introduction'),
         textField('resourcesTitle','Resources heading'), longField('resourcesIntro','Resources introduction'),
         textField('siteName','Website brand name'), textField('siteTagline','Website brand tagline'), textField('headerCta','Header CTA label'),
       ] },
