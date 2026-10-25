@@ -2583,3 +2583,10 @@ button {
 /* Custom luxury-curl HA signature: scalable in desktop and mobile headers. */
 .editorial-monogram { transform: none; padding: 0; border: 0; background: transparent; overflow: visible; }
 .editorial-monogram-art { display: block; width: 100%; height: 100%; overflow: visible; color: #102347; }
+
+/* Give the full interwoven HA flourish enough space to read as a signature. */
+.editorial-monogram { width: 4.15rem; height: 2.85rem; flex-shrink: 0; }
+.editorial-monogram-art { width: 100%; height: 100%; }
+@media (max-width: 760px) {
+  .editorial-monogram { width: 2.85rem; height: 2.1rem; }
+}
