@@ -43,6 +43,9 @@ export async function Footer() {
             <Link href="/services">Services</Link>
             <Link href="/portfolio">Portfolio</Link>
             <Link href="/journal">Reading Journal</Link>
+            <Link href="/websites">Websites</Link>
+            <Link href="/blog">Blog</Link>
+            <Link href="/resources">Resources</Link>
             <Link href="/contact">Work with me</Link>
           </nav>
           {socialLinks.length ? (
