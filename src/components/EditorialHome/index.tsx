@@ -2,6 +2,7 @@ import type { Journal, Media } from '@/payload-types'
 import configPromise from '@payload-config'
 import Link from 'next/link'
 import { getPayload } from 'payload'
+import { getSiteContent, copy } from '@/utilities/siteContent'
 
 const serviceGroups = [
   {
@@ -70,68 +71,66 @@ export async function EditorialHome() {
     // CMS setup is optional during local preview; use neutral, non-claim placeholders.
   }
 
+  const settings = await getSiteContent()
+  const c = (key: string, fallback: string) => copy(settings, key, fallback)
   const servicesToShow = services.length ? services : serviceGroups
 
   return (
     <div className="editorial-site">
       <section className="editorial-hero">
         <div className="editorial-hero-content">
-          <p className="editorial-eyebrow">Editorial care · Reader insight · Author support</p>
+          <p className="editorial-eyebrow">{c('heroEyebrow', "Editorial care · Reader insight · Author support")}</p>
           <h1>
-            Your story,
+            {c('heroTitleFirst', "Your story,")}
             <br />
-            <em>supported</em>
+            <em>{c('heroTitleEmphasis', "supported")}</em>
             <br />
-            at every stage.
+            {c('heroTitleLast', "at every stage.")}
           </h1>
           <p className="editorial-hero-intro">
-            Thoughtful editing, honest reader feedback, and dependable behind-the-scenes support for
-            authors bringing their stories to life.
+            {c('heroDescription', "Thoughtful editing, honest reader feedback, and dependable behind-the-scenes support for authors bringing their stories to life.")}
           </p>
           <div className="editorial-actions">
             <Link className="editorial-button editorial-button-primary" href="/services">
-              Explore services <span aria-hidden="true">↗</span>
+              {c('heroPrimaryButton', "Explore services")} <span aria-hidden="true">↗</span>
             </Link>
             <Link className="editorial-link" href="/portfolio#reading-journal">
-              Visit the Reading Journal
+              {c('heroSecondaryButton', "Visit the Reading Journal")}
             </Link>
           </div>
         </div>
         <div aria-hidden="true" className="editorial-hero-art">
           <div className="editorial-art-paper">
             <span>
-              For the love
-              <br />
-              of the story
+              {c('heroPaperText', 'For the love of the story')}
             </span>
             <i>✳</i>
           </div>
           <div className="editorial-art-note">
             A considered space
             <br />
-            for your next chapter.
+            for your {c('processEmphasis', "next chapter.")}
           </div>
           <div className="editorial-art-orbit" />
         </div>
         <div className="editorial-hero-index">
           <span>01</span>
-          <span>Thoughtful work, human first</span>
+          <span>{c('heroIndexText', "Thoughtful work, human first")}</span>
         </div>
       </section>
 
       <section className="editorial-section editorial-services-preview" id="services">
         <div className="editorial-section-head">
           <div>
-            <p className="editorial-eyebrow">Ways to work together</p>
+            <p className="editorial-eyebrow">{c('servicesEyebrow', "Ways to work together")}</p>
             <h2>
-              Good stories deserve
+              {c('servicesHeading', "Good stories deserve")}
               <br />
-              <em>good support.</em>
+              <em>{c('servicesEmphasis', "good support.")}</em>
             </h2>
           </div>
           <p className="editorial-section-note">
-            The right help depends on where you are in the process. We’ll begin with your goals,
-            then confirm scope and availability together.
+            {c('servicesDescription', "The right help depends on where you are in the process. We’ll begin with your goals, then confirm scope and availability together.")}
           </p>
         </div>
         <div className="editorial-service-grid">
@@ -154,23 +153,23 @@ export async function EditorialHome() {
           })}
         </div>
         <div className="editorial-section-foot">
-          <span>Scope and availability are confirmed before work begins.</span>
+          <span>{c('servicesFooter', "Scope and availability are confirmed before work begins.")}</span>
           <Link className="editorial-link" href="/services">
-            Compare services <span aria-hidden="true">↗</span>
+            {c('servicesButton', "Compare services")} <span aria-hidden="true">↗</span>
           </Link>
         </div>
       </section>
 
       <section className="editorial-approach">
         <div className="editorial-approach-inner">
-          <p className="editorial-eyebrow">A clear, collaborative process</p>
+          <p className="editorial-eyebrow">{c('processEyebrow', "A clear, collaborative process")}</p>
           <h2>
-            From first note
+            {c('processHeading', "From first note")}
             <br />
             to <em>next chapter.</em>
           </h2>
           <div className="editorial-process">
-            {[
+            {(Array.isArray(settings.processSteps) && settings.processSteps.length ? settings.processSteps.map((step: any, i: number) => [String(i + 1).padStart(2, '0'), step.title, step.description]) : [
               [
                 '01',
                 'Tell me about it',
@@ -187,7 +186,7 @@ export async function EditorialHome() {
                 'The agreed work begins with clear communication along the way.',
               ],
               ['04', 'Move forward', 'Receive the agreed deliverables and decide your next step.'],
-            ].map(([number, title, text]) => (
+            ]).map(([number, title, text]) => (
               <article key={number}>
                 <span>{number}</span>
                 <h3>{title}</h3>
@@ -202,15 +201,15 @@ export async function EditorialHome() {
         <section className="editorial-section editorial-reading-preview" id="reading-journal">
           <div className="editorial-section-head">
             <div>
-              <p className="editorial-eyebrow">A reader’s notebook</p>
+              <p className="editorial-eyebrow">{c('journalEyebrow', "A reader’s notebook")}</p>
               <h2>
-                Stories that
+                {c('journalHeading', "Stories that")}
                 <br />
-                <em>stay with us.</em>
+                <em>{c('journalEmphasis', "stay with us.")}</em>
               </h2>
             </div>
             <p className="editorial-section-note">
-              Personal reading notes, separate from confidential client work.
+              {c('journalDescription', "Personal reading notes, separate from confidential client work.")}
             </p>
           </div>
           <div className="editorial-reading-list">
@@ -263,7 +262,7 @@ export async function EditorialHome() {
               className="editorial-button editorial-button-secondary"
               href="/portfolio#reading-journal"
             >
-              Explore the Reading Journal
+              {c('journalButton', "Explore the Reading Journal")}
             </Link>
           </div>
         </section>
@@ -272,11 +271,11 @@ export async function EditorialHome() {
       {testimonials.length ? (
         <section className="editorial-testimonials">
           <div className="editorial-testimonials-inner">
-            <p className="editorial-eyebrow">Shared with permission</p>
+            <p className="editorial-eyebrow">{c('testimonialsEyebrow', "Shared with permission")}</p>
             <h2>
-              Kind words from
+              {c('testimonialsHeading', "Kind words from")}
               <br />
-              <em>collaborators.</em>
+              <em>{c('testimonialsEmphasis', "collaborators.")}</em>
             </h2>
             <div className="editorial-quote-grid">
               {testimonials.map((item) => (
@@ -295,20 +294,19 @@ export async function EditorialHome() {
 
       <section className="editorial-closing">
         <div>
-          <p className="editorial-eyebrow">Have a project in mind?</p>
+          <p className="editorial-eyebrow">{c('closingEyebrow', "Have a project in mind?")}</p>
           <h2>
-            Let’s find your
+            {c('closingHeading', "Let’s find your")}
             <br />
-            <em>next right step.</em>
+            <em>{c('closingEmphasis', "next right step.")}</em>
           </h2>
         </div>
         <div>
           <p>
-            Start with a few details. There’s no obligation—just a thoughtful first conversation
-            about your work and what support might help.
+            {c('closingDescription', "Start with a few details. There’s no obligation—just a thoughtful first conversation about your work and what support might help.")}
           </p>
           <Link className="editorial-button editorial-button-light" href="/contact">
-            Work with me <span aria-hidden="true">↗</span>
+            {c('closingButton', "Work with me")} <span aria-hidden="true">↗</span>
           </Link>
         </div>
       </section>
