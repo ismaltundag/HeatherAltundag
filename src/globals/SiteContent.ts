@@ -68,6 +68,14 @@ export const SiteContent: GlobalConfig = {
         textField('serviceCtaEmphasis', 'Service CTA emphasized heading'),
         textField('serviceCtaButton', 'Service CTA button'),
       ] },
+      { label: 'New sections', fields: [
+        textField('blogEyebrow','Blog eyebrow'), textField('blogTitle','Blog heading'), longField('blogIntro','Blog introduction'),
+        textField('webEyebrow','Website design eyebrow'), textField('webTitle','Website design heading'), longField('webIntro','Website design introduction'),
+        textField('assistantEyebrow','Author assistance eyebrow'), textField('assistantTitle','Author assistance heading'), longField('assistantIntro','Author assistance introduction'),
+        textField('packagesEyebrow','Packages eyebrow'), textField('packagesTitle','Packages heading'), longField('packagesIntro','Packages introduction'),
+        textField('resourcesTitle','Resources heading'), longField('resourcesIntro','Resources introduction'),
+        textField('siteName','Website brand name'), textField('siteTagline','Website brand tagline'), textField('headerCta','Header CTA label'),
+      ] },
       { label: 'Brand settings', fields: [
         { name: 'brandBlue', type: 'text', label: 'Royal blue hex color', admin: { description: 'e.g. #2450C8' }, validate: (value: unknown) => !value || (typeof value === 'string' && /^#[0-9a-fA-F]{6}$/.test(value)) ? true : 'Use a six-digit hex color such as #2450C8' },
         { name: 'brandYellow', type: 'text', label: 'Yellow hex color', validate: (value: unknown) => !value || (typeof value === 'string' && /^#[0-9a-fA-F]{6}$/.test(value)) ? true : 'Use a six-digit hex color such as #FFEB00' },
