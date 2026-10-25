@@ -14,6 +14,9 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
+import { BlogPosts } from '@/collections/BlogPosts'
+import { Offerings } from '@/collections/Offerings'
+import { Resources } from '@/collections/Resources'
 import { Journal } from '@/collections/Journal'
 import { Media } from '@/collections/Media'
 import { Pages } from '@/collections/Pages'
@@ -47,6 +50,9 @@ export default buildConfig({
     Users,
     Pages,
     Journal,
+    BlogPosts,
+    Offerings,
+    Resources,
     Services,
     PortfolioProjects,
     ServiceInquiries,

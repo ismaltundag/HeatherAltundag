@@ -17,11 +17,13 @@ const fallbackMenu: NonNullable<Header['navItems']> = [
   { id: 'services', link: { type: 'custom', label: 'Services', url: '/services' } },
   { id: 'portfolio', link: { type: 'custom', label: 'Portfolio', url: '/portfolio' } },
   { id: 'journal', link: { type: 'custom', label: 'Reading Journal', url: '/journal' } },
+  { id: 'websites', link: { type: 'custom', label: 'Websites', url: '/websites' } },
+  { id: 'blog', link: { type: 'custom', label: 'Blog', url: '/blog' } },
   { id: 'faq', link: { type: 'custom', label: 'FAQ', url: '/services#faq' } },
 ]
 
 export function HeaderClient({ header }: Props) {
-  const menu = fallbackMenu
+  const menu = header?.navItems?.length ? header.navItems : fallbackMenu
   const pathname = usePathname()
 
   return (
