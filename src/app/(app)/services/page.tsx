@@ -172,6 +172,15 @@ export default async function ServicesPage() {
           {c('pricingDisclaimer', "Any displayed rate is indicative unless explicitly agreed in a written quote. A submission does not reserve availability or create a client relationship.")}
         </p>
       </section>
+      <section className="editorial-section" id="more-services">
+        <div className="editorial-section-head"><div><p className="editorial-eyebrow">More ways to work together</p><h2>Beyond the <em>manuscript.</em></h2></div></div>
+        <div className="editorial-service-grid">
+          <Link className="editorial-service-card" href="/author-assistance"><span className="editorial-card-index">01</span><h3>Author assistance</h3><p>ARC teams, newsletters, book launches, and ongoing author-business support.</p><span className="editorial-card-arrow" aria-hidden="true">↗</span></Link>
+          <Link className="editorial-service-card" href="/websites"><span className="editorial-card-index">02</span><h3>Website design & development</h3><p>Author websites, redesigns, book catalogs, and ongoing website maintenance.</p><span className="editorial-card-arrow" aria-hidden="true">↗</span></Link>
+          <Link className="editorial-service-card" href="/packages"><span className="editorial-card-index">03</span><h3>Packages & pricing</h3><p>Focused services and ongoing support packages, tailored to your project.</p><span className="editorial-card-arrow" aria-hidden="true">↗</span></Link>
+          <Link className="editorial-service-card" href="/find-your-service"><span className="editorial-card-index">04</span><h3>Find your service</h3><p>Explore recommendations and estimate prices for published service packages.</p><span className="editorial-card-arrow" aria-hidden="true">↗</span></Link>
+        </div>
+      </section>
       <section className="editorial-faq-section" id="faq">
         <div className="editorial-section editorial-faq-layout">
           <div>
