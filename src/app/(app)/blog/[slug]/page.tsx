@@ -3,6 +3,9 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { RichText } from '@/components/RichText'
 import Link from 'next/link'
+
+// Published CMS content must be read at request time, not frozen at build time.
+export const dynamic = 'force-dynamic'
 export default async function Page({params}:{params:Promise<{slug:string}>}) {
   const {slug}=await params
   const payload=await getPayload({config:configPromise})
