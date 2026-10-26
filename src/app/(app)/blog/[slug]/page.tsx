@@ -10,6 +10,6 @@ export default async function Page({params}:{params:Promise<{slug:string}>}) {
   const post:any=posts.docs[0]
   if(!post) notFound()
   return <article className="editorial-page"><header className="editorial-page-hero"><p className="editorial-eyebrow">{post.category}</p><h1>{post.title}</h1><p>{post.excerpt}</p></header>
-    <section className="editorial-section"><RichText data={post.body} enableGutter={false}/><p><Link className="editorial-text-link" href="/blog">← All articles</Link></p></section>
+    <section className="editorial-section editorial-blog-body"><RichText data={post.body} enableGutter={false}/><p><Link className="editorial-text-link" href="/blog">← All articles</Link></p></section>
   </article>
 }
