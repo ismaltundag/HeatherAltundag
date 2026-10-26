@@ -2628,3 +2628,13 @@ button {
 .editorial-tool-result { padding:1rem; border-left:4px solid #2450C8; background:#f0f4ff; color:#102347; }
 .editorial-tools-grid a:focus-visible,.editorial-tools-grid input:focus-visible,.editorial-tools-grid select:focus-visible { outline:3px solid #FFEB00; outline-offset:3px; }
 @media(max-width:760px) { .editorial-tools-grid { grid-template-columns:1fr; } }
+
+/* Keep published blog article body readable on the light editorial page. */
+.editorial-blog-body,
+.editorial-blog-body :where(p, span, div, li, strong, em, b, i, h1, h2, h3, h4, h5, h6, blockquote) {
+  color: #000 !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+.editorial-blog-body a,
+.editorial-blog-body a * { color: #1646a8 !important; text-decoration: underline; }
