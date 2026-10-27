@@ -1,5 +1,14 @@
 import type { CollectionConfig } from 'payload'
 
+import { adminOnly } from '@/access/adminOnly'
+import { adminOrPublishedStatus } from '@/access/adminOrPublishedStatus'
+import {
+    MetaDescriptionField,
+    MetaImageField,
+    MetaTitleField,
+    OverviewField,
+    PreviewField,
+} from '@payloadcms/plugin-seo/fields'
 import { slugField } from 'payload'
 import { revalidateDeleteJournal, revalidateJournal } from './hooks/revalidateJournal'
 
