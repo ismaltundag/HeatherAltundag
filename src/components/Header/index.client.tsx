@@ -55,6 +55,7 @@ export function HeaderClient({ header, siteName, siteTagline, headerCta }: Props
               <li key={item.id}>
                 <Link
                   href={item.link.url || '#'}
+                  prefetch={false}
                   className={cn('editorial-nav-link', {
                     active:
                       item.link.url && item.link.url !== '/'
