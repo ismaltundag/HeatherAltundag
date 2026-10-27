@@ -56,7 +56,7 @@ export function MobileMenu({ menu }: Props) {
             <ul className="flex w-full flex-col">
               {menu.map((item) => (
                 <li className="py-2" key={item.id}>
-                  <Link className="editorial-mobile-nav-link text-white hover:text-[#FFEB00] focus-visible:text-[#FFEB00]" href={item.link.url || '/'}>
+                  <Link className="editorial-mobile-nav-link text-white hover:text-[#FFEB00] focus-visible:text-[#FFEB00]" href={item.link.url || '/'} prefetch={false} onClick={() => setIsOpen(false)}>
                     {item.link.label}
                   </Link>
                 </li>
