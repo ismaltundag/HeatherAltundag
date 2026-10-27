@@ -1,14 +1,5 @@
 import type { CollectionConfig } from 'payload'
 
-import { adminOnly } from '@/access/adminOnly'
-import { adminOrPublishedStatus } from '@/access/adminOrPublishedStatus'
-import {
-    MetaDescriptionField,
-    MetaImageField,
-    MetaTitleField,
-    OverviewField,
-    PreviewField,
-} from '@payloadcms/plugin-seo/fields'
 import { slugField } from 'payload'
 import { revalidateDeleteJournal, revalidateJournal } from './hooks/revalidateJournal'
 
@@ -141,29 +132,7 @@ export const Journal: CollectionConfig = {
           ],
           label: 'Content',
         },
-        {
-          name: 'meta',
-          label: 'SEO',
-          fields: [
-            OverviewField({
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-              imagePath: 'meta.image',
-            }),
-            MetaTitleField({
-              hasGenerateFn: true,
-            }),
-            MetaImageField({
-              relationTo: 'media',
-            }),
-            MetaDescriptionField({}),
-            PreviewField({
-              hasGenerateFn: true,
-              titlePath: 'meta.title',
-              descriptionPath: 'meta.description',
-            }),
-          ],
-        },
+
       ],
     },
     slugField(),
@@ -173,9 +142,7 @@ export const Journal: CollectionConfig = {
     afterDelete: [revalidateDeleteJournal],
   },
   versions: {
-    drafts: {
-      autosave: true,
-    },
+    drafts: true,
     maxPerDoc: 50,
   },
 }
