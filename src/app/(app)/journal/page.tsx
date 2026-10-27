@@ -4,6 +4,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getPayload } from 'payload'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
   title: 'Reading Journal | Editorial & Author Support',
   description: 'Personal reading notes, recent reads, and honest book reactions.',
@@ -20,7 +22,7 @@ export default async function JournalPage() {
       overrideAccess: false,
       sort: '-publishedAt',
       where: {
-        and: [{ _status: { equals: 'published' } }, { entryType: { equals: 'reading-review' } }],
+        _status: { equals: 'published' },
       },
     })
     entries = result.docs as Journal[]
