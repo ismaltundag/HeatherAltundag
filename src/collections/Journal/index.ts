@@ -2,7 +2,6 @@ import type { CollectionConfig } from 'payload'
 
 import { adminOnly } from '@/access/adminOnly'
 import { adminOrPublishedStatus } from '@/access/adminOrPublishedStatus'
-import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import {
     MetaDescriptionField,
     MetaImageField,
@@ -10,20 +9,6 @@ import {
     OverviewField,
     PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import {
-    BoldFeature,
-    FixedToolbarFeature,
-    HeadingFeature,
-    HorizontalRuleFeature,
-    IndentFeature,
-    InlineToolbarFeature,
-    ItalicFeature,
-    LinkFeature,
-    OrderedListFeature,
-    UnderlineFeature,
-    UnorderedListFeature,
-    lexicalEditor,
-} from '@payloadcms/richtext-lexical'
 import { slugField } from 'payload'
 import { revalidateDeleteJournal, revalidateJournal } from './hooks/revalidateJournal'
 
@@ -38,20 +23,6 @@ export const Journal: CollectionConfig = {
   admin: {
     defaultColumns: ['title', 'bookAuthor', 'genre', 'rating', 'publishedAt', '_status'],
     group: 'Reading Journal',
-    livePreview: {
-      url: ({ data, req }) =>
-        generatePreviewPath({
-          slug: data?.slug,
-          collection: 'journal' as any,
-          req,
-        }),
-    },
-    preview: (data, { req }) =>
-      generatePreviewPath({
-        slug: data?.slug as string,
-        collection: 'journal' as any,
-        req,
-      }),
     useAsTitle: 'title',
   },
   fields: [
@@ -164,23 +135,6 @@ export const Journal: CollectionConfig = {
             {
               name: 'content',
               type: 'richText',
-              editor: lexicalEditor({
-                features: () => [
-                  UnderlineFeature(),
-                  BoldFeature(),
-                  ItalicFeature(),
-                  OrderedListFeature(),
-                  UnorderedListFeature(),
-                  HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-                  LinkFeature({
-                    enabledCollections: ['pages'],
-                  }),
-                  IndentFeature(),
-                  HorizontalRuleFeature(),
-                  FixedToolbarFeature(),
-                  InlineToolbarFeature(),
-                ],
-              }),
               label: 'Entry Content',
               required: true,
             },
